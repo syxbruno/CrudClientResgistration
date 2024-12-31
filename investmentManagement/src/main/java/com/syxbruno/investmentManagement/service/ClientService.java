@@ -16,4 +16,13 @@ public class ClientService {
         return clientRepository.findById(id)
                 .orElseThrow(() -> new BadRequestException("Client not found"));
     }
+
+    public void saveClient(Client client) {
+
+        if(clientRepository.existsByCpf(client.getCpf())) {
+            throw new BadRequestException("CPF already registered");
+        }
+
+        clientRepository.save(client);
+    }
 }
