@@ -16,10 +16,17 @@ Este projeto implementa uma API REST para gerenciamento de **clientes**. A API p
 
 A API possui os seguintes endpoints para realizar operações CRUD:
 
-#### 1. **Buscar Cliente por id**
-- **Endpoint**: `/client/{id}`
+#### 1. **Buscar por todos os clientes cadastrados**
+- **Endpoint**: `/client/find`
 - **Método HTTP**: `GET`
-- **Descrição**: Busca e retorna um cliente já existente no banco de dados.
+- **Descrição**: Busca e retorna todos os clientes existente no banco de dados.
+
+---
+
+#### 2. **Buscar Cliente por id**
+- **Endpoint**: `/client/find/{id}`
+- **Método HTTP**: `GET`
+- **Descrição**: Busca e retorna um cliente já existente no banco de dados baseado no id passado na url.
 
 ##### Retorno:
 ```json
@@ -30,8 +37,9 @@ A API possui os seguintes endpoints para realizar operações CRUD:
 }
 
 ```
+---
 
-#### 2. **Cadastrar Cliente**
+#### 3. **Cadastrar Cliente**
 - **Endpoint**: `/client/save`
 - **Método HTTP**: `POST`
 - **Descrição**: Cadastra um novo cliente no sistema.
@@ -48,8 +56,28 @@ A API possui os seguintes endpoints para realizar operações CRUD:
 }
 
 ```
+---
 
-#### 3. **Deletar Cliente**
+#### 4. **Deletar Cliente**
+- **Endpoint**: `/client/update/{id}`
+- **Método HTTP**: `PUT`
+- **Descrição**: Atualiza dados de um cliente já cadastrado com base no id passado na url e atualiza de acordo com o json passado.
+
+##### Exemplo de Requisição:
+```json
+{
+    "name": "String",
+    "cpf": "String",
+    "password": "String",
+    "email": "String",
+    "phone": "String no formato (XX) XXXXX-XXXX",
+    "dateBirth": "LocalDate no formato dd/MM/yyyy"
+}
+
+```
+---
+
+#### 5. **Deletar Cliente**
 - **Endpoint**: `/client/delete`
 - **Método HTTP**: `DELETE`
 - **Descrição**: Exclui um cliente já existente no sistema.
