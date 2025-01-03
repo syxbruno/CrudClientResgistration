@@ -1,5 +1,6 @@
 package com.syxbruno.CrudClientRegistration.domain;
 
+import com.syxbruno.CrudClientRegistration.dto.ClientCreateDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,8 +12,8 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-@Entity
 @Data
+@Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
