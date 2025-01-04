@@ -36,17 +36,17 @@ public class ClientController {
     }
 
     @PostMapping(path = "/save")
-    public ResponseEntity<ClientResponseDTO> saveClient(@RequestBody @Valid ClientCreateDTO clientCreateDTO) {
+    public ResponseEntity<String> saveClient(@RequestBody @Valid ClientCreateDTO clientCreateDTO) {
         Client client = ClientMapper.toClient(clientCreateDTO);
 
         clientService.saveClient(client);
 
         ClientResponseDTO responseClient = ClientMapper.toResponseClient(client);
-        return new ResponseEntity<>(responseClient, HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body("customer created successfully, about: " + responseClient);
     }
 
     @PutMapping(path = "/update/{id}")
-    public ResponseEntity<ClientResponseDTO> updateClient(@PathVariable Long id, @RequestBody ClientCreateDTO clientCreateDTO) {
+    public ResponseEntity<String> updateClient(@PathVariable Long id, @RequestBody @Valid ClientCreateDTO clientCreateDTO) {
 
         clientService.updateClient(id, clientCreateDTO);
 
@@ -54,12 +54,16 @@ public class ClientController {
         ClientResponseDTO responseClient = ClientMapper.toResponseClient(client);
 
         responseClient.setId(id);
-        return ResponseEntity.ok(responseClient);
+        return ResponseEntity.status(HttpStatus.OK).body("client successfully updated, about: " + responseClient);
     }
 
     @DeleteMapping(path = "/delete/{id}")
-    public void deleteClient(@PathVariable Long id) {
+    public ResponseEntity<String> deleteClient(@PathVariable Long id) {
+
+        Client clientById = clientService.findClientById(id);
         clientService.delete(id);
+
+        return ResponseEntity.status(HttpStatus.OK).body("client successfully deleted, about: " + clientById);
     }
 }
 

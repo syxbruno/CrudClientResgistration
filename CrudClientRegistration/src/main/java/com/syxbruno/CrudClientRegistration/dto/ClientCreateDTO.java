@@ -32,8 +32,7 @@ public class ClientCreateDTO {
     @Pattern(regexp = "^\\(\\d{2}\\) \\d{5}-\\d{4}$", message = "Telephone must be in the format (XX) XXXXX-XXXX")
     private String phone;
 
-    @NotNull(message = "The date of birth is mandatory")
-    @Past(message = "Date of birth invalid")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-    private LocalDate dateBirth;
+    @NotBlank(message = "The date of birth is mandatory")
+    @Pattern(regexp = "^\\d{2}/\\d{2}/\\d{4}$", message = "Date of birth must be in the format dd/MM/yyyy")
+    private String dateBirth;
 }

@@ -4,7 +4,6 @@ import com.syxbruno.CrudClientRegistration.domain.Client;
 import com.syxbruno.CrudClientRegistration.dto.ClientCreateDTO;
 import com.syxbruno.CrudClientRegistration.dto.ClientResponseDTO;
 import com.syxbruno.CrudClientRegistration.exception.BadRequestException;
-import com.syxbruno.CrudClientRegistration.mapper.ClientMapper;
 import com.syxbruno.CrudClientRegistration.repository.ClientRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
