@@ -27,16 +27,16 @@ public class ClientService {
                 .orElseThrow(() -> new BadRequestException("Client not found"));
     }
 
-    public void saveClient(Client client) {
+    public Client saveClient(Client client) {
 
         if(clientRepository.existsByCpf(client.getCpf())) {
             throw new BadRequestException("CPF already registered");
         }
 
-        clientRepository.save(client);
+        return clientRepository.save(client);
     }
 
-    public void updateClient(Long id, ClientCreateDTO clientCreateDTO) {
+    public Client updateClient(Long id, ClientCreateDTO clientCreateDTO) {
         Client existingClient = findClientById(id);
 
         existingClient.setName(clientCreateDTO.getName());
@@ -46,7 +46,7 @@ public class ClientService {
         existingClient.setPhone(clientCreateDTO.getPhone());
         existingClient.setDateBirth(clientCreateDTO.getDateBirth());
 
-        clientRepository.save(existingClient);
+        return clientRepository.save(existingClient);
     }
 
     public void delete(Long id) {

@@ -39,9 +39,9 @@ public class ClientController {
     public ResponseEntity<String> saveClient(@RequestBody @Valid ClientCreateDTO clientCreateDTO) {
         Client client = ClientMapper.toClient(clientCreateDTO);
 
-        clientService.saveClient(client);
+        Client clientSaved = clientService.saveClient(client);
 
-        ClientResponseDTO responseClient = ClientMapper.toResponseClient(client);
+        ClientResponseDTO responseClient = ClientMapper.toResponseClient(clientSaved);
         return ResponseEntity.status(HttpStatus.CREATED).body("customer created successfully, about: " + responseClient);
     }
 

@@ -17,8 +17,6 @@ public class ClientResponseDTO {
     private String email;
 
     public ClientResponseDTO(Client client) {
-        this.id = client.getId();
-        this.name = client.getName();
-        this.email = client.getEmail();
+
     }
 }
