@@ -6,13 +6,14 @@ Este projeto implementa uma API REST para gerenciamento de **clientes**. A API p
 
 ### Tecnologias Utilizadas
 
--Backend: Java 21, Spring Boot
--Banco de Dados: MySQL (produção), H2 (testes)
--ORM: Spring Data JPA
--Validação: Spring Validation
--Testes: Spring Test (JUnit)
--Ferramentas: Docker, Maven, Lombok
--IDE: IntelliJ
+- **Backend:** Java 21, Spring Boot  
+- **Banco de Dados:** MySQL (produção), H2 (testes)  
+- **ORM:** Spring Data JPA  
+- **Validação:** Spring Validation  
+- **Testes:** Spring Test (JUnit)  
+- **Ferramentas:** Docker, Maven, Lombok  
+- **IDE:** IntelliJ  
+
 
 ### Funcionalidades
 
