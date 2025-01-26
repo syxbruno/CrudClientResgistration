@@ -1,13 +1,11 @@
-package com.syxbruno.CrudClientRegistration.dto;
+package com.syxbruno.CrudClientRegistration.dto.client;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CPF;
-import java.time.LocalDate;
 
 @Data
 @Builder

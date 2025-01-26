@@ -1,25 +1,32 @@
 package com.syxbruno.CrudClientRegistration.service;
 
+import com.syxbruno.CrudClientRegistration.config.SecurityConfiguration;
 import com.syxbruno.CrudClientRegistration.domain.Client;
-import com.syxbruno.CrudClientRegistration.dto.ClientCreateDTO;
-import com.syxbruno.CrudClientRegistration.dto.ClientResponseDTO;
+import com.syxbruno.CrudClientRegistration.dto.client.ClientCreateDTO;
+import com.syxbruno.CrudClientRegistration.dto.client.ClientResponseDTO;
 import com.syxbruno.CrudClientRegistration.exception.BadRequestException;
 import com.syxbruno.CrudClientRegistration.repository.ClientRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
-@Service
-@AllArgsConstructor
+@Service("clientService")
 public class ClientService {
 
-    private final ClientRepository clientRepository;
+    @Autowired
+    private ClientRepository clientRepository;
 
-    public Page<ClientResponseDTO> findAllClient(Pageable pageable) {
-        Page<Client> allClient = clientRepository.findAll(pageable);
+    @Autowired
+    private SecurityConfiguration securityConfiguration;
 
-        return allClient.map(ClientResponseDTO::new);
+    public List<ClientResponseDTO> findAllClient() {
+
+        List<Client> allClient = clientRepository.findAll();
+
+        return allClient
+                .stream()
+                .map(client -> ClientResponseDTO.builder().id(client.getId()).name(client.getName()).email(client.getEmail()).build())
+                .toList();
     }
 
     public Client findClientById(Long id) {
@@ -32,6 +39,9 @@ public class ClientService {
         if(clientRepository.existsByCpf(client.getCpf())) {
             throw new BadRequestException("CPF already registered");
         }
+
+        String passwordEncoder = securityConfiguration.passwordEncoder().encode(client.getPassword());
+        client.setPassword(passwordEncoder);
 
         return clientRepository.save(client);
     }

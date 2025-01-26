@@ -1,8 +1,8 @@
 package com.syxbruno.CrudClientRegistration.mapper;
 
 import com.syxbruno.CrudClientRegistration.domain.Client;
-import com.syxbruno.CrudClientRegistration.dto.ClientCreateDTO;
-import com.syxbruno.CrudClientRegistration.dto.ClientResponseDTO;
+import com.syxbruno.CrudClientRegistration.dto.client.ClientCreateDTO;
+import com.syxbruno.CrudClientRegistration.dto.client.ClientResponseDTO;
 
 public class ClientMapper {
 

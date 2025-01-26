@@ -1,6 +1,5 @@
-package com.syxbruno.CrudClientRegistration.dto;
+package com.syxbruno.CrudClientRegistration.dto.client;
 
-import com.syxbruno.CrudClientRegistration.domain.Client;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,8 +14,4 @@ public class ClientResponseDTO {
     private Long id;
     private String name;
     private String email;
-
-    public ClientResponseDTO(Client client) {
-
-    }
 }

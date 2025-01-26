@@ -1,8 +1,8 @@
 package com.syxbruno.CrudClientRegistration.controller;
 
 import com.syxbruno.CrudClientRegistration.domain.Client;
-import com.syxbruno.CrudClientRegistration.dto.ClientCreateDTO;
-import com.syxbruno.CrudClientRegistration.dto.ClientResponseDTO;
+import com.syxbruno.CrudClientRegistration.dto.client.ClientCreateDTO;
+import com.syxbruno.CrudClientRegistration.dto.client.ClientResponseDTO;
 import com.syxbruno.CrudClientRegistration.service.ClientService;
 import com.syxbruno.CrudClientRegistration.util.CreateClientTest;
 import com.syxbruno.CrudClientRegistration.util.CreateCreatedClientTest;
@@ -13,7 +13,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,8 +34,8 @@ class ClientControllerTest {
     void setUp() {
 
         PageImpl<ClientResponseDTO> clientPage = new PageImpl<>(List.of(CreateResponseClientTest.createValidResponseClient()));
-        BDDMockito.when(clientService.findAllClient(ArgumentMatchers.any()))
-                .thenReturn(clientPage);
+        BDDMockito.when(clientService.findAllClient())
+                .thenReturn(List.of(CreateResponseClientTest.createValidResponseClient()));
 
 
         BDDMockito.when(clientService.findClientById(ArgumentMatchers.anyLong()))
@@ -58,11 +57,14 @@ class ClientControllerTest {
     void findAllClient_ReturnPageClientResponse_WhenSuccessful() {
 
         String expectedName = CreateClientTest.createValidClient().getName();
-        Page<ClientResponseDTO> allClient = clientController.findAllClient(null).getBody();
+        List<ClientResponseDTO> allClient = clientController.findAllClient().getBody();
 
-        Assertions.assertThat(allClient).isNotNull().isNotEmpty();
-        Assertions.assertThat(allClient.toList()).hasSize(1);
-        Assertions.assertThat(allClient.toList().getFirst().getName()).isEqualTo(expectedName);
+        Assertions.assertThat(allClient)
+                .isNotNull()
+                .isNotEmpty()
+                .hasSize(1);
+
+        Assertions.assertThat(allClient.getFirst().getName()).isEqualTo(expectedName);
     }
 
     @Test

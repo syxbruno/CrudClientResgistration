@@ -1,4 +1,4 @@
-package com.syxbruno.CrudClientRegistration.dto;
+package com.syxbruno.CrudClientRegistration.dto.error;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

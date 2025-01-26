@@ -1,6 +1,6 @@
 package com.syxbruno.CrudClientRegistration.handler;
 
-import com.syxbruno.CrudClientRegistration.dto.ExceptionDTO;
+import com.syxbruno.CrudClientRegistration.dto.error.ExceptionDTO;
 import com.syxbruno.CrudClientRegistration.exception.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,5 +45,4 @@ public class RestExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
     }
-
 }

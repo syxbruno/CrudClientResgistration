@@ -1,6 +1,6 @@
 package com.syxbruno.CrudClientRegistration.util;
 
-import com.syxbruno.CrudClientRegistration.dto.ClientResponseDTO;
+import com.syxbruno.CrudClientRegistration.dto.client.ClientResponseDTO;
 
 public class CreateResponseClientTest {
 
