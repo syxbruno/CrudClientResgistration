@@ -1,96 +1,62 @@
-## API de Clientes - CRUD
+# CRUD Client Registration API
 
-### Descrição
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
-Este projeto implementa uma API REST para gerenciamento de **clientes**. A API permite realizar operações CRUD (Create, Read, Update, Delete) para cadastrar, buscar, atualizar e excluir informações de clientes em um banco de dados.
+## Project Overview
+This project is a RESTful API developed with Spring Boot, focused on User and Client management. The application implements JWT authentication and role-based access control, where users can have the roles `admin` or `user`. Persistence is handled by a MySQL database, and the project includes a robust suite of unit and integration tests, using H2 for simulations. Additionally, the infrastructure is containerized with Docker, facilitating deployment and scalability.
 
-### Tecnologias Utilizadas
+## Architecture and Endpoints
 
-- **Backend:** Java 21, Spring Boot  
-- **Banco de Dados:** MySQL (produção), H2 (testes)  
-- **ORM:** Spring Data JPA  
-- **Validação:** Spring Validation  
-- **Testes:** Spring Test (JUnit)  
-- **Ferramentas:** Docker, Maven, Lombok  
-- **IDE:** IntelliJ  
+### User Controller
+- **Register**: *Admin-only endpoint*, allows the registration of new users.
+- **Login**: Open to any user. Performs authentication and returns a JWT token for use in protected endpoints.
+- **Delete**: *Admin-only endpoint*, allows the deletion of registered users.
 
+### Client Controller
+- **findAllClient**: Available to users with the `user` role or higher (`admin`), returns a list of all clients.
+- **findClientById**: Allows users with the `user` role to retrieve data of a specific client.
+- **saveClient**: *Admin-only endpoint*, allows the registration of new clients.
+- **updateClient**: Endpoint for updating client data, available to admins only.
+- **deleteClient**: *Admin-only endpoint*, allows the deletion of clients.
 
-### Funcionalidades
+## Security and Authentication
+The API's security is ensured by Spring Security, with JWT token authentication. The authentication flow occurs at the login endpoint, where the generated token is used to authenticate and authorize subsequent requests. The interactive documentation (Springdoc OpenAPI) integrates this functionality, allowing the JWT token to be inserted directly via the lock icon in the Swagger interface.
 
-A API possui os seguintes endpoints para realizar operações CRUD:
+## Technologies and Libraries Used
 
-#### 1. **Buscar por todos os clientes cadastrados**
-- **Endpoint**: `/client/find`
-- **Método HTTP**: `GET`
-- **Descrição**: Busca e retorna todos os clientes existente no banco de dados.
+- **Spring Boot Web**: Development of the REST API.
+- **Spring Data JPA**: Integration and data manipulation in MySQL.
+- **Spring Security**: Access control and authentication.
+- **JWT Token**: Authentication management and validation.
+- **Spring Validation**: Input data validation.
+- **Springdoc OpenAPI**: Generation of interactive documentation (Swagger UI).
+- **Lombok**: Reduces boilerplate code with automatic generation of methods and constructors.
+- **Maven**: Dependency management and project build.
+- **JDBC MySQL**: Configuration of connection and persistence with MySQL.
+- **H2 Database**: Lightweight database used for unit and integration tests.
+- **Spring Test (JUnit and Mockito)**: Unit testing and mock creation.
 
----
+- **Docker & Docker Compose**:
+  - **Docker**: Application containerization, ensuring environment portability and consistency.
+  - **Docker Compose**: Container orchestration (including the application and MySQL database), facilitating deployment and environment configuration for both development and production.
 
-#### 2. **Buscar Cliente por id**
-- **Endpoint**: `/client/find/{id}`
-- **Método HTTP**: `GET`
-- **Descrição**: Busca e retorna um cliente já existente no banco de dados baseado no id passado na url.
+## Testing and Quality
+The project includes a comprehensive suite of tests:
 
-##### Retorno:
-```json
-{
-    "id": "Long",
-    "name": "String",
-    "email": "String"
-}
+- **JUnit**: Writing and executing unit tests.
+- **Mockito**: Creating mocks to isolate components during tests.
+- **H2 Database**: Lightweight environment for integration tests, simulating the behavior of the real database.
 
-```
----
+## Containerization with Docker
+To simplify deployment and environment management, the project uses Docker. A `docker-compose.yml` file is configured to orchestrate the necessary containers, such as:
 
-#### 3. **Cadastrar Cliente**
-- **Endpoint**: `/client/save`
-- **Método HTTP**: `POST`
-- **Descrição**: Cadastra um novo cliente no sistema.
+- **Application Container**: Runs the Spring Boot API.
+- **MySQL Container**: Persistent database for the application.
 
-##### Exemplo de Requisição:
-```json
-{
-    "name": "String",
-    "cpf": "String",
-    "password": "String",
-    "email": "String",
-    "phone": "String no formato (XX) XXXXX-XXXX",
-    "dateBirth": "LocalDate no formato dd/MM/yyyy"
-}
+This approach ensures that the environment is easily replicable and scalable, both for development and production, ensuring consistency in application execution.
 
-```
----
-
-#### 4. **Deletar Cliente**
-- **Endpoint**: `/client/update/{id}`
-- **Método HTTP**: `PUT`
-- **Descrição**: Atualiza dados de um cliente já cadastrado com base no id passado na url e atualiza de acordo com o json passado.
-
-##### Exemplo de Requisição:
-```json
-{
-    "name": "String",
-    "cpf": "String",
-    "password": "String",
-    "email": "String",
-    "phone": "String no formato (XX) XXXXX-XXXX",
-    "dateBirth": "LocalDate no formato dd/MM/yyyy"
-}
-
-```
----
-
-#### 5. **Deletar Cliente**
-- **Endpoint**: `/client/delete`
-- **Método HTTP**: `DELETE`
-- **Descrição**: Exclui um cliente já existente no sistema.
-
-##### Exemplo de Requisição:
-```json
-{
-    "id": "Long",
-    "name": "String",
-    "email": "String"
-}
-
-```
+## Conclusion
+This project presents a well-structured architecture, combining best practices in security, documentation, and testing. With well-defined endpoints for user and client management, JWT authentication, and a containerized infrastructure via Docker, the application stands out as a robust, scalable, and high-quality solution for corporate systems. The integration of modern technologies from the Spring ecosystem and the use of Docker simplify deployment, making the project an excellent base for future development and expansion.
