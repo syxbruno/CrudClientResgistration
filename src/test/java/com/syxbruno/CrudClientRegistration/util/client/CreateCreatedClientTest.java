@@ -1,4 +1,4 @@
-package com.syxbruno.CrudClientRegistration.util;
+package com.syxbruno.CrudClientRegistration.util.client;
 
 import com.syxbruno.CrudClientRegistration.dto.client.ClientCreateDTO;
 

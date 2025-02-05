@@ -1,11 +1,14 @@
 package com.syxbruno.CrudClientRegistration.dto.client;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CPF;
+
+@Schema(description = "This dto class is aimed at creating a client, it receives all the attributes that a client has except an id (which will be generated in the database automatically)")
 
 @Data
 @Builder

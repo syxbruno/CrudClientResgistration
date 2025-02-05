@@ -2,10 +2,10 @@ package com.syxbruno.CrudClientRegistration.service;
 
 import com.syxbruno.CrudClientRegistration.config.SecurityConfiguration;
 import com.syxbruno.CrudClientRegistration.domain.User;
-import com.syxbruno.CrudClientRegistration.dto.user.CreateUserDTO;
-import com.syxbruno.CrudClientRegistration.dto.user.DeleteUserDTO;
-import com.syxbruno.CrudClientRegistration.dto.user.LoginUserDTO;
-import com.syxbruno.CrudClientRegistration.dto.user.ResponseUserDTO;
+import com.syxbruno.CrudClientRegistration.dto.user.UserCreateDTO;
+import com.syxbruno.CrudClientRegistration.dto.user.UserDeleteDTO;
+import com.syxbruno.CrudClientRegistration.dto.user.UserLoginDTO;
+import com.syxbruno.CrudClientRegistration.dto.user.UserResponseDTO;
 import com.syxbruno.CrudClientRegistration.exception.BadRequestException;
 import com.syxbruno.CrudClientRegistration.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class UserService {
     @Autowired
     private SecurityConfiguration securityConfiguration;
 
-    public ResponseUserDTO register(CreateUserDTO createUserDTO) {
+    public UserResponseDTO register(UserCreateDTO createUserDTO) {
 
         String passwordEncoder = securityConfiguration.passwordEncoder().encode(createUserDTO.getPassword());
 
@@ -36,7 +36,7 @@ public class UserService {
                 .role(createUserDTO.getRole())
                 .build();
 
-        ResponseUserDTO responseUserDTO = ResponseUserDTO.builder()
+        UserResponseDTO responseUserDTO = UserResponseDTO.builder()
                 .name(createUserDTO.getName())
                 .login(createUserDTO.getLogin())
                 .build();
@@ -52,7 +52,7 @@ public class UserService {
         return responseUserDTO;
     }
 
-    public ResponseEntity<String> login(LoginUserDTO loginUserDTO) {
+    public ResponseEntity<String> login(UserLoginDTO loginUserDTO) {
 
         User findByLogin = userRepository.findByLogin(loginUserDTO.getLogin());
 
@@ -70,7 +70,7 @@ public class UserService {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect login or password");
     }
 
-    public ResponseEntity<String> delete(DeleteUserDTO deleteUserDTO) {
+    public ResponseEntity<String> delete(UserDeleteDTO deleteUserDTO) {
 
         User user = userRepository.findByLogin(deleteUserDTO.getLogin());
         userRepository.delete(user);

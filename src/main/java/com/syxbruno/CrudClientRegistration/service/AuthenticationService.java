@@ -5,7 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.syxbruno.CrudClientRegistration.domain.User;
-import com.syxbruno.CrudClientRegistration.dto.user.LoginUserDTO;
+import com.syxbruno.CrudClientRegistration.dto.user.UserLoginDTO;
 import com.syxbruno.CrudClientRegistration.exception.BadRequestException;
 import com.syxbruno.CrudClientRegistration.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class  AuthenticationService implements UserDetailsService {
         return userByLogin;
     }
 
-    public String getToken(LoginUserDTO loginUserDTO) {
+    public String getToken(UserLoginDTO loginUserDTO) {
 
         User user = userRepository.findByLogin(loginUserDTO.getLogin());
 

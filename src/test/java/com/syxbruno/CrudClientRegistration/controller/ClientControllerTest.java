@@ -4,19 +4,19 @@ import com.syxbruno.CrudClientRegistration.domain.Client;
 import com.syxbruno.CrudClientRegistration.dto.client.ClientCreateDTO;
 import com.syxbruno.CrudClientRegistration.dto.client.ClientResponseDTO;
 import com.syxbruno.CrudClientRegistration.service.ClientService;
-import com.syxbruno.CrudClientRegistration.util.CreateClientTest;
-import com.syxbruno.CrudClientRegistration.util.CreateCreatedClientTest;
-import com.syxbruno.CrudClientRegistration.util.CreateResponseClientTest;
+import com.syxbruno.CrudClientRegistration.util.client.CreateClientTest;
+import com.syxbruno.CrudClientRegistration.util.client.CreateCreatedClientTest;
+import com.syxbruno.CrudClientRegistration.util.client.CreateResponseClientTest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import java.util.Collections;
 import java.util.List;
 
 @ExtendWith(SpringExtension.class)
@@ -33,7 +33,6 @@ class ClientControllerTest {
     @BeforeEach
     void setUp() {
 
-        PageImpl<ClientResponseDTO> clientPage = new PageImpl<>(List.of(CreateResponseClientTest.createValidResponseClient()));
         BDDMockito.when(clientService.findAllClient())
                 .thenReturn(List.of(CreateResponseClientTest.createValidResponseClient()));
 
@@ -53,8 +52,8 @@ class ClientControllerTest {
 
 
     @Test
-    @DisplayName("findAllClient returns Page<ClientResponseDTO> when successful")
-    void findAllClient_ReturnPageClientResponse_WhenSuccessful() {
+    @DisplayName("findAllClient returns List<ClientResponseDTO> when successful")
+    void findAllClient_ReturnListClientResponse_WhenSuccessful() {
 
         String expectedName = CreateClientTest.createValidClient().getName();
         List<ClientResponseDTO> allClient = clientController.findAllClient().getBody();
@@ -68,7 +67,22 @@ class ClientControllerTest {
     }
 
     @Test
-    @DisplayName("findClientById returns Client when successfull")
+    @DisplayName("findAllClient must return an empty list")
+    void findAllClient_MustReturnEmptyList() {
+
+        BDDMockito.when(clientService.findAllClient())
+                .thenReturn(Collections.emptyList());
+
+        List<ClientResponseDTO> allClient = clientController.findAllClient().getBody();
+
+        Assertions.assertThat(allClient)
+                .isNotNull()
+                .isEmpty();
+    }
+
+
+    @Test
+    @DisplayName("findClientById returns Client when successful")
     void findClientById_ReturnClient_WhenSuccessful() {
 
         Long expectedId = CreateClientTest.createValidClient().getId();
@@ -78,34 +92,37 @@ class ClientControllerTest {
         Assertions.assertThat(clientById.getId()).isNotNull().isEqualTo(expectedId);
     }
 
+
     @Test
     @DisplayName("saveClient and return Client when successful")
     void saveClient_ReturnClient_WhenSuccessful() {
 
         ResponseEntity<String> clientSaved = clientController.saveClient(CreateCreatedClientTest.createValidCreatedClient());
-        ResponseEntity<String> compare = ResponseEntity.status(HttpStatus.CREATED).body("customer created successfully, about: " + CreateResponseClientTest.createValidResponseClient());
+        ResponseEntity<String> compare = ResponseEntity.status(HttpStatus.CREATED).body("Customer created successfully, about: " + CreateResponseClientTest.createValidResponseClient());
 
         Assertions.assertThat(clientSaved)
                 .isNotNull()
                 .isEqualTo(compare);
     }
 
+
     @Test
     void updateClient() {
 
         ResponseEntity<String> clientUpdate = clientController.updateClient(1L, CreateCreatedClientTest.createValidCreatedClient());
-        ResponseEntity<String> compare = ResponseEntity.status(HttpStatus.OK).body("client successfully updated, about: " + CreateResponseClientTest.createValidResponseClient());
+        ResponseEntity<String> compare = ResponseEntity.status(HttpStatus.OK).body("Client successfully updated, about: " + CreateResponseClientTest.createValidResponseClient());
 
         Assertions.assertThat(clientUpdate)
                 .isNotNull()
                 .isEqualTo(compare);
     }
 
+
     @Test
     void deleteClient() {
 
         ResponseEntity<String> clientForDelete = clientController.deleteClient(1L);
-        ResponseEntity<String> compare = ResponseEntity.status(HttpStatus.OK).body("client successfully deleted, about: " + CreateClientTest.createValidClient());
+        ResponseEntity<String> compare = ResponseEntity.status(HttpStatus.OK).body("Client successfully deleted, about: " + CreateClientTest.createValidClient());
 
         Assertions.assertThat(clientForDelete).isNotNull();
         Assertions.assertThat(clientForDelete).isEqualTo(compare);
