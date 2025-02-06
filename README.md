@@ -6,7 +6,7 @@
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
 ## Project Overview
-This project is a RESTful API developed with Spring Boot, focused on User and Client management. The application implements JWT authentication and role-based access control, where users can have the roles `admin` or `user`. Persistence is handled by a MySQL database, and the project includes a robust suite of unit and integration tests, using H2 for simulations. Additionally, the infrastructure is containerized with Docker, facilitating deployment and scalability.
+This project was developed using the Java programming language and the Spring framework, focusing on client registration. It provides endpoints for CRUD (Create, Read, Update, Delete) operations, each with a minimum access hierarchy defined by users already registered in the database. These users can have `ADMIN` or `USER` roles. Data persistence is managed by the MySQL database.
 
 ## Architecture and Endpoints
 
@@ -23,7 +23,7 @@ This project is a RESTful API developed with Spring Boot, focused on User and Cl
 - **deleteClient**: *Admin-only endpoint*, allows the deletion of clients.
 
 ## Security and Authentication
-The API's security is ensured by Spring Security, with JWT token authentication. The authentication flow occurs at the login endpoint, where the generated token is used to authenticate and authorize subsequent requests. The interactive documentation (Springdoc OpenAPI) integrates this functionality, allowing the JWT token to be inserted directly via the lock icon in the Swagger interface.
+The API's security is ensured by Spring Security, with JWT token authentication. The authentication flow occurs at the login endpoint, where the generated token is used to authenticate and authorize subsequent requests. The interactive documentation (Springdoc OpenAPI) integrates this functionality, allowing the JWT token to be inserted directly via the Autentication icon in the Swagger interface.
 
 ## Technologies and Libraries Used
 
@@ -38,10 +38,7 @@ The API's security is ensured by Spring Security, with JWT token authentication.
 - **JDBC MySQL**: Configuration of connection and persistence with MySQL.
 - **H2 Database**: Lightweight database used for unit and integration tests.
 - **Spring Test (JUnit and Mockito)**: Unit testing and mock creation.
-
-- **Docker & Docker Compose**:
-  - **Docker**: Application containerization, ensuring environment portability and consistency.
-  - **Docker Compose**: Container orchestration (including the application and MySQL database), facilitating deployment and environment configuration for both development and production.
+- **Docker Compose**: Container orchestration (including the application and MySQL database), facilitating deployment and environment configuration for both development and production.
 
 ## Testing and Quality
 The project includes a comprehensive suite of tests:
@@ -57,6 +54,3 @@ To simplify deployment and environment management, the project uses Docker. A `d
 - **MySQL Container**: Persistent database for the application.
 
 This approach ensures that the environment is easily replicable and scalable, both for development and production, ensuring consistency in application execution.
-
-## Conclusion
-This project presents a well-structured architecture, combining best practices in security, documentation, and testing. With well-defined endpoints for user and client management, JWT authentication, and a containerized infrastructure via Docker, the application stands out as a robust, scalable, and high-quality solution for corporate systems. The integration of modern technologies from the Spring ecosystem and the use of Docker simplify deployment, making the project an excellent base for future development and expansion.
