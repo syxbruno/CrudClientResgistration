@@ -1,0 +1,10 @@
+com\syxbruno\CrudClientRegistration\util\user\CreateUserTest.class
+com\syxbruno\CrudClientRegistration\util\client\CreateResponseClientTest.class
+com\syxbruno\CrudClientRegistration\util\client\CreateCreatedClientTest.class
+com\syxbruno\CrudClientRegistration\util\user\CreateDeleteUserTest.class
+com\syxbruno\CrudClientRegistration\controller\UserControllerTest.class
+com\syxbruno\CrudClientRegistration\controller\ClientControllerTest.class
+com\syxbruno\CrudClientRegistration\util\client\CreateClientTest.class
+com\syxbruno\CrudClientRegistration\util\user\CreateCreatedUserTest.class
+com\syxbruno\CrudClientRegistration\util\user\CreateResponseUserTest.class
+com\syxbruno\CrudClientRegistration\util\user\CreateLoginUserTest.class

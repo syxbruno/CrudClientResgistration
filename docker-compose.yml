@@ -2,14 +2,16 @@ version: '3.1'
 
 services:
   db:
-    image: mysql
+    image: postgres:latest
     container_name: CrudClientRegistration_Database
     environment:
-      MYSQL_ROOT_PASSWORD: syxbruno
+      POSTGRES_USER: bruno
+      POSTGRES_PASSWORD: '12345'
+      POSTGRES_DB: CrudClientRegistration_Database
     ports:
-      - "3306:3306"
+      - "5432:5432"
     volumes:
-      - syxbruno_data:/var/lib/CrudClientRegistration_Database
+      - postgres_data:/var/lib/postgresql/data
 
 volumes:
-  syxbruno_data:
+  postgres_data:
